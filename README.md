@@ -32,10 +32,9 @@ Point your *settings.xml* at [Maven Central](http://repo1.maven.org/maven2) and 
 
 ```xml
     <dependency>
-      <groupId>net.rcarz</groupId>
+      <groupId>io.github.misterfifi1</groupId>
       <artifactId>jira-client</artifactId>
-      <version>0.5</version>
-      <scope>compile</scope>
+      <version>0.6.1</version>
     </dependency>
 ```
 

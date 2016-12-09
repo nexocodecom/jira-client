@@ -3,7 +3,7 @@
 
   <groupId>io.github.misterfifi1</groupId>
   <artifactId>jira-client</artifactId>
-  <version>0.6.1</version>
+  <version>0.6.2-perf</version>
   <packaging>jar</packaging>
 
   <name>jira-client</name>

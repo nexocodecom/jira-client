@@ -28,14 +28,13 @@ jira-client is still under heavy development. Here's what works:
 
 ## Maven Dependency ##
 
-Point your *settings.xml* at [Maven Central](http://repo1.maven.org/maven2) and add jira-client to your project.
+Point your *pom.xml* at [Maven Central](http://repo1.maven.org/maven2) and add jira-client to your project.
 
 ```xml
     <dependency>
-      <groupId>net.rcarz</groupId>
+      <groupId>io.github.misterfifi1</groupId>
       <artifactId>jira-client</artifactId>
-      <version>0.5</version>
-      <scope>compile</scope>
+      <version>0.6.1</version>
     </dependency>
 ```
 

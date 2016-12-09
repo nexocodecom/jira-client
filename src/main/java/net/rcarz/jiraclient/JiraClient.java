@@ -90,6 +90,17 @@ public class JiraClient {
     }
 
     /**
+     * Retreives JIRA Server Info.
+     *
+     * @return a ServerInfo instance
+     *
+     * @throws JiraException when something goes wrong
+     */
+    public ServerInfo getServerInfo() throws JiraException {
+        return ServerInfo.get(restclient);
+    }
+
+    /**
      * Creates a new issue in the given project.
      *
      * @param project Key of the project to create in

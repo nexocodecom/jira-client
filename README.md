@@ -1,12 +1,14 @@
 # jira-client #
 
-[![Build Status](https://travis-ci.org/rcarz/jira-client.svg?branch=master)](https://travis-ci.org/rcarz/jira-client)
+[![Build Status](https://travis-ci.org/nexocodecom/jira-client.svg?branch=master)](https://travis-ci.org/nexocodecom/jira-client)
 
 jira-client is a simple and lightweight JIRA REST client library for Java.
 
 The goal of the project is to provide **simple** and clean English idiomatic expressions for interacting with JIRA. In pursuit of this goal, jira-client lacks the usual verbose and cumbersome contortions often found in Java applications. And since the implementation isn't buried under 57 layers of complicated abstractions, jira-client is easy to extend and debug.
 
 jira-client depends on [Apache HttpComponents](http://hc.apache.org/), [json-lib](http://json.sourceforge.net/), and [joda-time](http://www.joda.org/joda-time/).
+
+This fork includes fixed from [misterfifi1/jira-client](https://github.com/misterfifi1/jira-client) (published as `io.github.misterfifi1:jira-client:0.6.2-perf`).
 
 ## Features ##
 
@@ -32,9 +34,9 @@ Point your *pom.xml* at [Maven Central](http://repo1.maven.org/maven2) and add j
 
 ```xml
     <dependency>
-      <groupId>io.github.misterfifi1</groupId>
+      <groupId>com.nexocode</groupId>
       <artifactId>jira-client</artifactId>
-      <version>0.6.1</version>
+      <version>0.7</version>
     </dependency>
 ```
 

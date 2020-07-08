@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.misterfifi1</groupId>
+  <groupId>com.nexocode</groupId>
   <artifactId>jira-client</artifactId>
-  <version>0.6.2-perf</version>
+  <version>0.7.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>jira-client</name>
-  <description>Missing release of "A simple JIRA REST client" :)</description>
-  <url>https://github.com/rcarz/jira-client</url>
+  <description>A simple JIRA REST client</description>
+  <url>https://github.com/nexocodecom/jira-client</url>
 
   <licenses>
     <license>
@@ -19,8 +19,8 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/rcarz/jira-client</url>
-    <connection>https://github.com/rcarz/jira-client</connection>
+    <url>https://github.com/nexocodecom/jira-client</url>
+    <connection>https://github.com/nexocodecom/jira-client</connection>
   </scm>
 
     <distributionManagement>
@@ -36,14 +36,9 @@
 
   <developers>
     <developer>
-      <id>rcarz</id>
-      <name>Bob Carroll</name>
-      <email>bob.carroll@alum.rit.edu</email>
+      <id>pkubowicz</id>
+      <name>Piotr Kubowicz</name>
     </developer>
-      <developer>
-          <id>misterfifi1</id>
-          <name>misterfifi</name>
-      </developer>
   </developers>
 
   <parent>

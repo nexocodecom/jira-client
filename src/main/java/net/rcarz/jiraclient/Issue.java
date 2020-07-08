@@ -23,11 +23,16 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import net.rcarz.utils.WorklogUtils;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  * Represents a JIRA issue.
@@ -790,6 +795,7 @@ public class Issue extends Resource {
     private Integer timeSpent = null;
     private Date createdDate = null;
     private Date updatedDate = null;
+    private Security security = null;
 
     /**
      * Creates an issue from a JSON payload.
@@ -844,6 +850,7 @@ public class Issue extends Resource {
         timeSpent = Field.getInteger(fields.get(Field.TIME_SPENT));
         createdDate = Field.getDateTime(fields.get(Field.CREATED_DATE));
         updatedDate = Field.getDateTime(fields.get(Field.UPDATED_DATE));
+        security = Field.getResource(Security.class, fields.get(Field.SECURITY), restclient);
     }
 
     private static String getRestUri(String key) {
@@ -1073,6 +1080,36 @@ public class Issue extends Resource {
         }
 
         return new Comment(restclient, (JSONObject) result, key);
+    }
+
+  /**
+   * Adds {@link WorkLog} to this issue
+   * @param comment provided comment
+   * @param startDate provided start date
+   * @param timeSpentSeconds provided time spent. This cannot be lower than 1m inute
+   * @return
+   * @throws JiraException when worklog creation fails
+   */
+    public WorkLog addWorkLog(String comment, DateTime startDate, long timeSpentSeconds) throws JiraException {
+        try {
+            if (comment == null)
+                throw new IllegalArgumentException("Invalid comment.");
+            if (startDate == null)
+                throw new IllegalArgumentException("Invalid start time.");
+            if (timeSpentSeconds < 60) // We do not add a worklog that duration is below a minute
+                throw new IllegalArgumentException("Time spent cannot be lower than 1 minute.");
+
+            JSONObject req = new JSONObject();
+            req.put("comment", comment);
+            req.put("started", DateTimeFormat.forPattern(Field.DATETIME_FORMAT_ZTIMEZONE).print(startDate.getMillis()));
+            req.put("timeSpent", WorklogUtils.formatDurationFromSeconds(timeSpentSeconds));
+
+            JSON result = restclient.post(getRestUri(key) + "/worklog", req);
+            JSONObject jo = (JSONObject) result;
+            return new WorkLog(restclient, jo);
+        } catch (Exception ex) {
+            throw new JiraException("Failed add worklog to issue " + key, ex);
+        }
     }
 
     /**
@@ -1655,6 +1692,10 @@ public class Issue extends Resource {
         return updatedDate;
     }
 
+    public Security getSecurity() {
+        return security;
+    }
+
     public boolean delete(final boolean deleteSubtasks) throws JiraException {
         boolean result;
         try {
@@ -1667,5 +1708,6 @@ public class Issue extends Resource {
         }
         return result;
     }
+
 }
 

@@ -1,3 +1,9 @@
 language: java
-jdk:
-  - openjdk8
+install: mvn clean compile -V -B
+script: mvn install -B
+
+jobs:
+  include:
+    - jdk: openjdk8
+    - jdk: openjdk11
+      script: mvn install -DskipTests -B

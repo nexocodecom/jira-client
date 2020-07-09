@@ -336,7 +336,7 @@ public class RestClient {
      * Content-Type header. You should not use this function when proper JSON
      * is expected.
      *
-     * @see https://jira.atlassian.com/browse/JRA-29304
+     * @see <a href="https://jira.atlassian.com/browse/JRASERVER-29304">JRASERVER-29304</a>
      *
      * @param uri Full URI of the remote endpoint
      * @param payload Raw string to send to the remote service

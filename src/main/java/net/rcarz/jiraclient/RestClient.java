@@ -59,9 +59,9 @@ import java.util.Map;
  */
 public class RestClient {
 
-    private HttpClient httpClient = null;
-    private ICredentials creds = null;
-    private URI uri = null;
+    private final HttpClient httpClient;
+    private final ICredentials creds;
+    private final URI uri;
 
     /**
      * Creates a REST client instance with a URI.
@@ -111,7 +111,8 @@ public class RestClient {
      */
     public URI buildURI(String path, Map<String, String> params) throws URISyntaxException {
         URIBuilder ub = new URIBuilder(uri);
-        ub.setPath(ub.getPath() + path);
+        String originalPath = ub.getPath();
+        ub.setPath((originalPath == null ? "" : originalPath) + path);
 
         if (params != null) {
             for (Map.Entry<String, String> ent : params.entrySet())
@@ -177,14 +178,8 @@ public class RestClient {
         throws RestException, IOException {
 
         if (payload != null) {
-            StringEntity ent = null;
-
-            try {
-                ent = new StringEntity(payload, "UTF-8");
-                ent.setContentType("application/json");
-            } catch (UnsupportedEncodingException ex) {
-                /* utf-8 should always be supported... */
-            }
+            StringEntity ent = new StringEntity(payload, "UTF-8");
+            ent.setContentType("application/json");
 
             req.addHeader("Content-Type", "application/json");
             req.setEntity(ent);
@@ -196,10 +191,9 @@ public class RestClient {
     private JSON request(HttpEntityEnclosingRequestBase req, File file)
         throws RestException, IOException {
         if (file != null) {
-            File fileUpload = file;
             req.setHeader("X-Atlassian-Token", "nocheck");
             MultipartEntity ent = new MultipartEntity();
-            ent.addPart("file", new FileBody(fileUpload));
+            ent.addPart("file", new FileBody(file));
             req.setEntity(ent);
         }
         return request(req);

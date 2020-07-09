@@ -8,7 +8,7 @@ The goal of the project is to provide **simple** and clean English idiomatic exp
 
 jira-client depends on [Apache HttpComponents](http://hc.apache.org/), [json-lib](http://json.sourceforge.net/), and [joda-time](http://www.joda.org/joda-time/).
 
-This fork includes fixed from [misterfifi1/jira-client](https://github.com/misterfifi1/jira-client) (published as `io.github.misterfifi1:jira-client:0.6.2-perf`).
+This fork includes fixes from [misterfifi1/jira-client](https://github.com/misterfifi1/jira-client) (published as `io.github.misterfifi1:jira-client:0.6.2-perf`).
 
 ## Features ##
 
@@ -36,7 +36,7 @@ Point your *pom.xml* at [Maven Central](http://repo1.maven.org/maven2) and add j
     <dependency>
       <groupId>com.nexocode</groupId>
       <artifactId>jira-client</artifactId>
-      <version>0.7</version>
+      <version>0.7.0</version>
     </dependency>
 ```
 

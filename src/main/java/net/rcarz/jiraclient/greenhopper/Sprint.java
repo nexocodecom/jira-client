@@ -21,14 +21,12 @@ package net.rcarz.jiraclient.greenhopper;
 
 import net.rcarz.jiraclient.Field;
 import net.rcarz.jiraclient.RestClient;
+import net.sf.json.JSONObject;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import net.sf.json.JSONObject;
-
-import org.joda.time.DateTime;
 
 /**
  * Represents a GreenHopper sprint.
@@ -37,9 +35,9 @@ public class Sprint extends GreenHopperResource {
 
     private String name = null;
     private boolean closed = false;
-    private DateTime startDate = null;
-    private DateTime endDate = null;
-    private DateTime completeDate = null;
+    private Instant startDate = null;
+    private Instant endDate = null;
+    private Instant completeDate = null;
     private List<Integer> issuesIds = null;
     private List<SprintIssue> issues = null;
 
@@ -81,15 +79,15 @@ public class Sprint extends GreenHopperResource {
         return closed;
     }
 
-    public DateTime getStartDate() {
+    public Instant getStartDate() {
         return startDate;
     }
 
-    public DateTime getEndDate() {
+    public Instant getEndDate() {
         return endDate;
     }
 
-    public DateTime getCompleteDate() {
+    public Instant getCompleteDate() {
         return completeDate;
     }
 

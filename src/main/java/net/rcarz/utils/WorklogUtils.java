@@ -1,9 +1,8 @@
 package net.rcarz.utils;
 
 import net.rcarz.jiraclient.WorkLog;
-import org.joda.time.DurationFieldType;
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
+
+import java.time.Duration;
 
 /**
  * Created by mariusmerkevicius on 1/30/16.
@@ -22,16 +21,13 @@ public class WorklogUtils {
         if (durationInSeconds < 60)
             return "0m";
         StringBuilder builder = new StringBuilder();
-        PeriodType type = PeriodType.forFields(new DurationFieldType[]{
-                DurationFieldType.hours(),
-                DurationFieldType.minutes()
-        });
 
-        Period period = new Period(1000 * durationInSeconds, type);
-        if (period.getHours() != 0)
-            builder.append(period.getHours()).append("h").append(" ");
-        if (period.getMinutes() != 0)
-            builder.append(period.getMinutes()).append("m").append(" ");
+        Duration duration = Duration.ofSeconds(durationInSeconds);
+        if (duration.toHours() != 0)
+            builder.append(duration.toHours()).append("h").append(" ");
+        long minutes = duration.toMinutes() % 60;
+        if (minutes != 0)
+            builder.append(minutes).append("m").append(" ");
         if ((builder.length() > 0) && builder.charAt(builder.length() - 1) == " ".charAt(0))
             builder.deleteCharAt(builder.length() - 1);
         return builder.toString();

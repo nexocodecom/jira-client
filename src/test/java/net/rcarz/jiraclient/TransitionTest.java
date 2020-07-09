@@ -2,20 +2,13 @@ package net.rcarz.jiraclient;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Map;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 public class TransitionTest {
 
@@ -49,7 +42,7 @@ public class TransitionTest {
     public void testGetFields() throws Exception {
         Transition transition = new Transition(new RestClient(null, new URI("/123/asd")), getTestJson());
         final Map fields = transition.getFields();
-        Assert.assertEquals(2,fields.size());
+        assertEquals(2,fields.size());
 
     }
 

@@ -19,20 +19,24 @@
 
 package net.rcarz.jiraclient;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 import net.rcarz.utils.WorklogUtils;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a JIRA issue.
@@ -1090,7 +1094,7 @@ public class Issue extends Resource {
    * @return
    * @throws JiraException when worklog creation fails
    */
-    public WorkLog addWorkLog(String comment, DateTime startDate, long timeSpentSeconds) throws JiraException {
+    public WorkLog addWorkLog(String comment, Instant startDate, long timeSpentSeconds) throws JiraException {
         try {
             if (comment == null)
                 throw new IllegalArgumentException("Invalid comment.");
@@ -1101,7 +1105,7 @@ public class Issue extends Resource {
 
             JSONObject req = new JSONObject();
             req.put("comment", comment);
-            req.put("started", DateTimeFormat.forPattern(Field.DATETIME_FORMAT_ZTIMEZONE).print(startDate.getMillis()));
+            req.put("started", startDate.toString());
             req.put("timeSpent", WorklogUtils.formatDurationFromSeconds(timeSpentSeconds));
 
             JSON result = restclient.post(getRestUri(key) + "/worklog", req);

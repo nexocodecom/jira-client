@@ -3,14 +3,13 @@ package net.rcarz.jiraclient;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-import org.joda.time.DateTime;
 import org.junit.Test;
+
+import java.time.Instant;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -52,10 +51,10 @@ public class IssueWorklogTest {
         // Arrange
         Issue issue = mock(Issue.class);
         issue.restclient = mock(RestClient.class);
-        doCallRealMethod().when(issue).addWorkLog(anyString(), any(DateTime.class), anyLong());
+        doCallRealMethod().when(issue).addWorkLog(anyString(), any(Instant.class), anyLong());
 
         // Act
-        issue.addWorkLog("test", DateTime.now(), 60);
+        issue.addWorkLog("test", Instant.now(), 60);
 
         // Assert
         verify(issue.restclient).post(anyString(), any(JSON.class));
@@ -66,11 +65,11 @@ public class IssueWorklogTest {
         // Arrange
         Issue issue = mock(Issue.class);
         issue.restclient = mock(RestClient.class);
-        doCallRealMethod().when(issue).addWorkLog(anyString(), any(DateTime.class), anyLong());
+        doCallRealMethod().when(issue).addWorkLog(anyString(), any(Instant.class), anyLong());
 
         // Act
         // Assert
-        issue.addWorkLog(null, DateTime.now(), 120);
+        issue.addWorkLog(null, Instant.now(), 120);
     }
 
     @Test(expected = JiraException.class)
@@ -78,7 +77,7 @@ public class IssueWorklogTest {
         // Arrange
         Issue issue = mock(Issue.class);
         issue.restclient = mock(RestClient.class);
-        doCallRealMethod().when(issue).addWorkLog(anyString(), any(DateTime.class), anyLong());
+        doCallRealMethod().when(issue).addWorkLog(anyString(), any(Instant.class), anyLong());
 
         // Act
         // Assert
@@ -90,11 +89,11 @@ public class IssueWorklogTest {
         // Arrange
         Issue issue = mock(Issue.class);
         issue.restclient = mock(RestClient.class);
-        doCallRealMethod().when(issue).addWorkLog(anyString(), any(DateTime.class), anyLong());
+        doCallRealMethod().when(issue).addWorkLog(anyString(), any(Instant.class), anyLong());
 
         // Act
         // Assert
-        issue.addWorkLog("asdf", DateTime.now(), 30);
+        issue.addWorkLog("asdf", Instant.now(), 30);
     }
 
 

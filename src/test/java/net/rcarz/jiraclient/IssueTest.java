@@ -1,25 +1,20 @@
 package net.rcarz.jiraclient;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import net.sf.json.JSON;
 import net.sf.json.JSONNull;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.net.URI;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.mock;
 
 public class IssueTest {
 
@@ -117,13 +112,13 @@ public class IssueTest {
 
         Version version = versions.get(0);
 
-        Assert.assertEquals(version.getId(), "10200");
-        Assert.assertEquals(version.getName(), "1.0");
+        assertEquals(version.getId(), "10200");
+        assertEquals(version.getName(), "1.0");
         assertFalse(version.isArchived());
         assertFalse(version.isReleased());
-        Assert.assertEquals(version.getStartDate(), "2013-11-01");
-        Assert.assertEquals(version.getReleaseDate(), "2013-12-01");
-        Assert.assertEquals(version.getDescription(), "First Full Functional Build");
+        assertEquals(version.getStartDate(), "2013-11-01");
+        assertEquals(version.getReleaseDate(), "2013-12-01");
+        assertEquals(version.getDescription(), "First Full Functional Build");
     }
 
     @Test
@@ -137,13 +132,13 @@ public class IssueTest {
     @Test
     public void testCreatedDate(){
         Issue issue = new Issue(null,Utils.getTestIssue());
-        assertEquals(new DateTime(2013, 9, 29, 20, 16, 19, 854, DateTimeZone.forOffsetHours(1)).toDate(), issue.getCreatedDate());
+        assertEquals(dateFrom("2013-09-29T20:16:19.854+0100"), issue.getCreatedDate());
     }
 
     @Test
-    public void testUpdatedDate(){
-      Issue issue = new Issue(null,Utils.getTestIssue());
-      assertEquals(new DateTime(2013, 10, 9, 22, 24, 55, 961, DateTimeZone.forOffsetHours(1)).toDate(), issue.getUpdatedDate());
+    public void testUpdatedDate() {
+        Issue issue = new Issue(null, Utils.getTestIssue());
+        assertEquals(dateFrom("2013-10-09T22:24:55.961+0100"), issue.getUpdatedDate());
     }
 
     @Test
@@ -217,5 +212,9 @@ public class IssueTest {
         when(restClient.delete(eq(uri))).thenReturn(null);
         Issue issue = new Issue(restClient, Utils.getTestIssue());
         Assert.assertTrue(issue.delete(true));
+    }
+
+    private static Date dateFrom(String dateString) {
+        return Date.from(DateTimeFormatter.ofPattern(Field.DATETIME_FORMAT_XTIMEZONE).parse(dateString, OffsetDateTime::from).toInstant());
     }
 }

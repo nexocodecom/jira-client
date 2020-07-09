@@ -36,7 +36,7 @@ Point your *pom.xml* at [Maven Central](http://repo1.maven.org/maven2) and add j
     <dependency>
       <groupId>com.nexocode</groupId>
       <artifactId>jira-client</artifactId>
-      <version>0.7.0</version>
+      <version>0.8.0</version>
     </dependency>
 ```
 
